@@ -199,25 +199,25 @@ export default function Home() {
         </header>
 
         {/* Hero Section */}
-        <section ref={heroRef} className="relative z-10 flex min-h-screen w-full items-center justify-center pt-16">
+        <section ref={heroRef} className="relative z-10 flex min-h-screen w-full items-center justify-center pt-16 md:pt-20">
           <div className="container mx-auto px-4">
             <motion.div
               style={{ opacity: titleOpacity, y: titleY }}
-              className="flex flex-col items-center justify-center gap-6 px-4 text-center"
+              className="flex flex-col items-center justify-center gap-4 md:gap-6 px-4 text-center"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight flex flex-wrap justify-center items-center gap-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight flex flex-wrap justify-center items-center gap-2">
                 Tersine{" "}
                 <AnimatedGradientText
                   speed={2}
                   colorFrom="#c4b5fd"
                   colorTo="#a21caf"
-                  className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight py-2"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight py-2"
                 >
                   Beyin Göçü
                 </AnimatedGradientText>
               </h1>
               <motion.h2
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-300 tracking-tighter"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-300 tracking-tighter"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -226,7 +226,7 @@ export default function Home() {
                 Yeteneğinizi Ülkenize Taşıyın
               </motion.h2>
               <motion.p
-                className="text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl mx-auto px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -236,21 +236,21 @@ export default function Home() {
                 hedefliyor.
               </motion.p>
               <motion.div
-                className="flex flex-col sm:flex-row gap-4 mt-4"
+                className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto justify-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <a href="#basvuru">
+                <a href="#basvuru" className="w-full sm:w-auto">
                   <GradientButton
                     label="Hemen Başvurun"
                     icon={<ArrowRight size={16} />}
-                    className="font-medium rounded-lg shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40"
+                    className="font-medium rounded-lg shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 w-full sm:w-auto"
                   />
                 </a>
                 <a
                   href="#program"
-                  className="h-10 px-4 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg transition-colors border border-white/10 hover:border-purple-500/30 transition-all-smooth"
+                  className="w-full sm:w-auto h-10 px-4 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg transition-colors border border-white/10 hover:border-purple-500/30 transition-all-smooth"
                 >
                   Programı Keşfedin
                 </a>
@@ -260,8 +260,10 @@ export default function Home() {
         </section>
 
         {/* Globe Section */}
-        <div className="relative flex justify-center items-center py-72 bg-neutral-950">
-          <Globe />
+        <div className="relative flex justify-center items-center min-h-[400px] sm:min-h-[500px] md:min-h-[600px] bg-neutral-950">
+          <div className="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] aspect-square m-0 p-0 border-none">
+            <Globe />
+          </div>
         </div>
 
         {/* About Section */}
