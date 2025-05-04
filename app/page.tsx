@@ -260,7 +260,7 @@ export default function Home() {
         </section>
 
         {/* Globe Section */}
-        <div className="relative flex justify-center items-center py-72 bg-black">
+        <div className="relative flex justify-center items-center py-72 bg-neutral-950">
           <Globe />
         </div>
 
@@ -605,7 +605,7 @@ export default function Home() {
               </div>
             </div>
             <div className="border-t border-white/10 mt-8 pt-8 text-center">
-              <p className="text-white/50">© 2023 Tersine Beyin Göçü Programı. Tüm hakları saklıdır.</p>
+              <p className="text-white/50">© 2025 Tersine Beyin Göçü Programı. Tüm hakları saklıdır.</p>
             </div>
           </div>
         </footer>
