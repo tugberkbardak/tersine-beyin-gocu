@@ -259,12 +259,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Globe Section */}
-        <div className="relative flex justify-center items-center min-h-[400px] sm:min-h-[500px] md:min-h-[600px] bg-neutral-950">
-          <div className="w-full h-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] aspect-square m-0 p-0 border-none">
-            <Globe />
-          </div>
-        </div>
+
 
         {/* About Section */}
         <section id="hakkimizda" className="relative z-10 py-20 w-full bg-neutral-950">
