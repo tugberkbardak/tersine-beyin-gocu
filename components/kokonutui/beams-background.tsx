@@ -32,11 +32,10 @@ function createBeam(width: number, height: number): Beam {
     y: Math.random() * height * 1.5 - height * 0.25,
     width: 30 + Math.random() * 60,
     length: height * 2.5,
-    angle: angle,
+    angle,
     speed: 0.6 + Math.random() * 1.2,
     opacity: 0.12 + Math.random() * 0.16,
-    // Changed hue range to create white and purple beams
-    hue: Math.random() < 0.5 ? 270 + Math.random() * 30 : 0 + Math.random() * 10,
+    hue: Math.random() < 0.5 ? 270 + Math.random() * 30 : Math.random() * 10,
     pulse: Math.random() * Math.PI * 2,
     pulseSpeed: 0.02 + Math.random() * 0.03,
   }
@@ -50,7 +49,7 @@ export default function BeamsBackground({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const beamsRef = useRef<Beam[]>([])
   const animationFrameRef = useRef<number>(0)
-  const MINIMUM_BEAMS = 20
+  const BASE_BEAMS = 30
 
   const opacityMap = {
     subtle: 0.7,
@@ -67,22 +66,40 @@ export default function BeamsBackground({
 
     const updateCanvasSize = () => {
       const dpr = window.devicePixelRatio || 1
-      canvas.width = window.innerWidth * dpr
-      canvas.height = window.innerHeight * dpr
+      const prevWidth = canvas.width
+      const prevHeight = canvas.height
+      const newWidth = window.innerWidth * dpr
+      const newHeight = window.innerHeight * dpr
+
+      if (beamsRef.current.length && prevWidth && prevHeight) {
+        for (let beam of beamsRef.current) {
+          beam.x = (beam.x / prevWidth) * newWidth
+          beam.y = (beam.y / prevHeight) * newHeight
+        }
+      }
+
+      canvas.width = newWidth
+      canvas.height = newHeight
       canvas.style.width = `${window.innerWidth}px`
       canvas.style.height = `${window.innerHeight}px`
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
-
-      const totalBeams = MINIMUM_BEAMS * 1.5
-      beamsRef.current = Array.from({ length: totalBeams }, () => createBeam(canvas.width, canvas.height))
     }
 
     updateCanvasSize()
     window.addEventListener("resize", updateCanvasSize)
 
-    function resetBeam(beam: Beam, index: number, totalBeams: number) {
-      if (!canvas) return beam
+    // Determine beam count; increase on narrower screens
+    const screenWidth = window.innerWidth
+    const beamCount = screenWidth < 768 ? BASE_BEAMS * 1.5 : BASE_BEAMS
 
+    if (beamsRef.current.length < beamCount) {
+      beamsRef.current = Array.from({ length: Math.floor(beamCount) }, () =>
+        createBeam(canvas.width, canvas.height)
+      )
+    }
+
+    function resetBeam(beam: Beam, index: number, totalBeams: number) {
       const column = index % 3
       const spacing = canvas.width / 3
 
@@ -90,8 +107,9 @@ export default function BeamsBackground({
       beam.x = column * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.5
       beam.width = 100 + Math.random() * 100
       beam.speed = 0.5 + Math.random() * 0.4
-      // Alternate between white and purple for new beams
-      beam.hue = Math.random() < 0.5 ? 270 + (index * 30) / totalBeams : 0 + (index * 10) / totalBeams
+      beam.hue = Math.random() < 0.5
+        ? 270 + (index * 30) / totalBeams
+        : (index * 10) / totalBeams
       beam.opacity = 0.2 + Math.random() * 0.1
       return beam
     }
@@ -101,32 +119,25 @@ export default function BeamsBackground({
       ctx.translate(beam.x, beam.y)
       ctx.rotate((beam.angle * Math.PI) / 180)
 
-      // Calculate pulsing opacity
-      const pulsingOpacity = beam.opacity * (0.8 + Math.sin(beam.pulse) * 0.2) * opacityMap[intensity]
+      const pulsingOpacity =
+        beam.opacity * (0.8 + Math.sin(beam.pulse) * 0.2) * opacityMap[intensity]
 
       const gradient = ctx.createLinearGradient(0, 0, 0, beam.length)
-
-      // Enhanced gradient with multiple color stops
-      // Using white or purple based on the hue value
       const isWhite = beam.hue < 50
       const colorValue = isWhite
         ? `hsla(${beam.hue}, 10%, 95%, ${pulsingOpacity})`
         : `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity})`
 
       gradient.addColorStop(0, isWhite ? `hsla(${beam.hue}, 10%, 95%, 0)` : `hsla(${beam.hue}, 85%, 65%, 0)`)
-      gradient.addColorStop(
-        0.1,
-        isWhite
-          ? `hsla(${beam.hue}, 10%, 95%, ${pulsingOpacity * 0.5})`
-          : `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`,
+      gradient.addColorStop(0.1, isWhite
+        ? `hsla(${beam.hue}, 10%, 95%, ${pulsingOpacity * 0.5})`
+        : `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
       )
       gradient.addColorStop(0.4, colorValue)
       gradient.addColorStop(0.6, colorValue)
-      gradient.addColorStop(
-        0.9,
-        isWhite
-          ? `hsla(${beam.hue}, 10%, 95%, ${pulsingOpacity * 0.5})`
-          : `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`,
+      gradient.addColorStop(0.9, isWhite
+        ? `hsla(${beam.hue}, 10%, 95%, ${pulsingOpacity * 0.5})`
+        : `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
       )
       gradient.addColorStop(1, isWhite ? `hsla(${beam.hue}, 10%, 95%, 0)` : `hsla(${beam.hue}, 85%, 65%, 0)`)
 
@@ -146,7 +157,6 @@ export default function BeamsBackground({
         beam.y -= beam.speed
         beam.pulse += beam.pulseSpeed
 
-        // Reset beam when it goes off screen
         if (beam.y + beam.length < -100) {
           resetBeam(beam, index, totalBeams)
         }
@@ -161,30 +171,25 @@ export default function BeamsBackground({
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize)
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
     }
   }, [intensity])
 
   return (
     <div className={cn("absolute inset-0 w-full overflow-hidden bg-neutral-950", className)}>
-      <canvas ref={canvasRef} className="fixed inset-0" style={{ filter: 'blur(20px)' }} />
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0"
+        style={{ filter: 'blur(20px)' }}
+      />
 
       <motion.div
         className="fixed inset-0 bg-neutral-950/5"
-        animate={{
-          opacity: [0.05, 0.15, 0.05],
-        }}
-        transition={{
-          duration: 10,
-          ease: "easeInOut",
-          repeat: Number.POSITIVE_INFINITY,
-        }}
+        animate={{ opacity: [0.05, 0.15, 0.05] }}
+        transition={{ duration: 10, ease: "easeInOut", repeat: Infinity }}
         style={{ backdropFilter: 'blur(40px)' }}
       />
 
-      {/* Content will be rendered through children prop */}
       <div className="relative z-10">{children}</div>
     </div>
   )

@@ -237,7 +237,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        
         {/* About Section */}
         <section id="hakkimizda" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
