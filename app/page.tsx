@@ -8,7 +8,7 @@ import Faq02 from "@/components/faq"
 import { FlipText } from "@/components/magicui/flip-text"
 import GradientButton from "@/components/ui/gradient-button"
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text"
-
+import { Globe } from "@/components/magicui/globe"
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -237,7 +237,14 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
+
+        {/* Globe Section */}
+        <div className="relative z-10 my-12 flex flex-col items-center space-y-2 md:flex-row md:space-x-10 md:space-y-0 justify-center">
+          <div className="text-white text-3xl font-bold">2880 Öğrenci</div>
+          <Globe className="!static w-full max-w-[600px] aspect-square" />
+          <div className="text-white text-3xl font-bold">84 Şirket</div>
+        </div>
+
         {/* About Section */}
         <section id="hakkimizda" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
