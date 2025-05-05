@@ -99,9 +99,12 @@ export default function Home() {
       <BeamsBackground />
       <div className="relative">
         {/* Navigation */}
+
         <header
           className={`fixed top-0 z-50 w-full transition-all-smooth ${
-            scrolled ? "bg-neutral-950/80 backdrop-blur-lg py-4 shadow-lg shadow-purple-900/10" : "bg-transparent py-4"
+            scrolled
+              ? "bg-neutral-950/80 backdrop-blur-lg py-2 shadow-md shadow-purple-900/10"
+              : "bg-transparent py-2"
           }`}
         >
           <div className="container mx-auto px-4">
@@ -113,7 +116,9 @@ export default function Home() {
                   transition={{ duration: 0.5 }}
                   className="transition-all-smooth"
                 >
-                  <div className="font-bold text-2xl md:text-3xl text-white">Tersine Beyin Göçü</div>
+                  <div className="font-bold text-xl md:text-2xl text-white">
+                    Tersine <span className="text-purple-400">Beyin Göçü</span>
+                  </div>
                 </motion.div>
               </div>
 
