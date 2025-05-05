@@ -5,11 +5,10 @@ import { motion, useScroll, useTransform } from "motion/react"
 import { ArrowRight, Menu, Quote, Star, X } from "lucide-react"
 import BeamsBackground from "@/components/kokonutui/beams-background"
 import Faq02 from "@/components/faq"
-import { AuroraText } from "@/components/magicui/aurora-text"
 import { FlipText } from "@/components/magicui/flip-text"
 import GradientButton from "@/components/ui/gradient-button"
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text"
-import { Globe } from "@/components/magicui/globe"
+
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -102,7 +101,7 @@ export default function Home() {
         {/* Navigation */}
         <header
           className={`fixed top-0 z-50 w-full transition-all-smooth ${
-            scrolled ? "bg-neutral-950/80 backdrop-blur-lg py-2 shadow-lg shadow-purple-900/10" : "bg-transparent py-4"
+            scrolled ? "bg-neutral-950/80 backdrop-blur-lg py-4 shadow-lg shadow-purple-900/10" : "bg-transparent py-4"
           }`}
         >
           <div className="container mx-auto px-4">
@@ -114,16 +113,7 @@ export default function Home() {
                   transition={{ duration: 0.5 }}
                   className="transition-all-smooth"
                 >
-                  <AuroraText
-                    size={scrolled ? "sm" : "md"}
-                    color="purple"
-                    colorWeight="600"
-                    blur={40}
-                    offset={15}
-                    className="font-bold"
-                  >
-                    Tersine Beyin Göçü
-                  </AuroraText>
+                  <div className="font-bold text-2xl md:text-3xl text-white">Tersine Beyin Göçü</div>
                 </motion.div>
               </div>
 
@@ -201,10 +191,7 @@ export default function Home() {
         {/* Hero Section */}
         <section ref={heroRef} className="relative z-10 flex min-h-screen w-full items-center justify-center pt-16 md:pt-20">
           <div className="container mx-auto px-4">
-            <motion.div
-              style={{ opacity: titleOpacity, y: titleY }}
-              className="flex flex-col items-center justify-center gap-4 md:gap-6 px-4 text-center"
-            >
+            <div className="flex flex-col items-center justify-center gap-4 md:gap-6 px-4 text-center">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight flex flex-wrap justify-center items-center gap-2">
                 Tersine{" "}
                 <AnimatedGradientText
@@ -216,30 +203,22 @@ export default function Home() {
                   Beyin Göçü
                 </AnimatedGradientText>
               </h1>
-              <motion.h2
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-300 tracking-tighter"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                style={{ fontFamily: "Carattere, Corinthia, cursive" }}
+              <h2
+                className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-purple-300 tracking-tighter"
+                style={{ fontFamily: "Carattere, cursive" }}
               >
                 Yeteneğinizi Ülkenize Taşıyın
-              </motion.h2>
-              <motion.p
+              </h2>
+              <p
                 className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl mx-auto px-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                style={{ fontWeight: 500, margin: 0 }}
               >
                 Yurt dışında edindiğiniz deneyim ve bilgi birikimini Türkiye'ye taşıyarak ülkemizin gelişimine katkıda
                 bulunun. Tersine beyin göçü programımız, yurt dışındaki yetenekli Türkleri ülkemize geri kazandırmayı
                 hedefliyor.
-              </motion.p>
-              <motion.div
+              </p>
+              <div
                 className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <a href="#basvuru" className="w-full sm:w-auto">
                   <GradientButton
@@ -254,23 +233,15 @@ export default function Home() {
                 >
                   Programı Keşfedin
                 </a>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-
-
 
         {/* About Section */}
         <section id="hakkimizda" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto text-center mb-12"
-            >
+            <div className="max-w-3xl mx-auto text-center mb-12">
               <FlipText
                 as="h2"
                 className="text-3xl md:text-4xl font-bold text-white mb-6 section-title"
@@ -289,8 +260,7 @@ export default function Home() {
                 Programımız, geri dönen yeteneklere kariyer fırsatları, araştırma destekleri, vergi avantajları ve
                 sosyal entegrasyon desteği gibi çeşitli teşvikler sunmaktadır.
               </p>
-            </motion.div>
-
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {[
                 {
@@ -308,17 +278,13 @@ export default function Home() {
                     "Türkiye'ye dönüş yapan profesyoneller için kapsamlı sosyal entegrasyon programları sunuyoruz.",
                 },
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  className="bg-purple-900/90 backdrop-blur-sm p-6 rounded-lg border border-purple-900/20 hover:border-purple-500/30 transition-all-smooth"
+                  className="bg-purple-900/80 p-6 rounded-lg border border-purple-900/20 hover:border-purple-500/30 shadow-md transition-all-smooth"
                 >
                   <h3 className="text-xl font-semibold text-white mb-3 section-title-left purple-glow">{item.title}</h3>
                   <p className="text-white/70">{item.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -327,12 +293,7 @@ export default function Home() {
         {/* Testimonials Section - Updated */}
         <section id="yorumlar" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto text-center mb-12"
-            >
+            <div className="max-w-3xl mx-auto text-center mb-12">
               <FlipText
                 as="h2"
                 className="text-3xl md:text-4xl font-bold text-white mb-6 section-title"
@@ -344,16 +305,12 @@ export default function Home() {
               <p className="text-white/70 text-lg leading-relaxed">
                 Programımıza katılan ve Türkiye'ye geri dönen profesyonellerin deneyimleri ve düşünceleri.
               </p>
-            </motion.div>
-
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {testimonials.map((testimonial, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`testimonial-card p-6 ${index === currentTestimonial ? "ring-2 ring-purple-500/50" : ""}`}
+                  className={`testimonial-card p-6 bg-purple-900/80 border border-purple-900/20 rounded-lg shadow-md ${index === currentTestimonial ? "ring-2 ring-purple-500/50" : ""}`}
                 >
                   <div className="text-purple-400 mb-2">
                     <Quote size={20} />
@@ -369,7 +326,7 @@ export default function Home() {
                     <p className="text-white/60 text-sm">{testimonial.role}</p>
                     <p className="text-purple-300/80 text-sm">{testimonial.location}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -378,13 +335,7 @@ export default function Home() {
         {/* Program Section */}
         <section id="program" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto text-center mb-12"
-            >
+            <div className="max-w-3xl mx-auto text-center mb-12">
               <FlipText
                 as="h2"
                 className="text-3xl md:text-4xl font-bold text-white mb-6 section-title"
@@ -397,8 +348,7 @@ export default function Home() {
                 Tersine beyin göçü programımız, farklı sektörlerde ve alanlarda uzmanlaşmış profesyoneller için çeşitli
                 fırsatlar sunmaktadır.
               </p>
-            </motion.div>
-
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {[
                 {
@@ -419,17 +369,13 @@ export default function Home() {
                   description: "Kamu kurumlarında uzman pozisyonlar için özel kariyer yolları oluşturuyoruz.",
                 },
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  className="bg-purple-900/90 backdrop-blur-sm p-6 rounded-lg border border-purple-900/20 hover:border-purple-500/30 transition-all-smooth"
+                  className="bg-purple-900/80 p-6 rounded-lg border border-purple-900/20 hover:border-purple-500/30 shadow-md transition-all-smooth"
                 >
                   <h3 className="text-xl font-semibold text-white mb-3 section-title-left purple-glow">{item.title}</h3>
                   <p className="text-white/70">{item.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -438,13 +384,7 @@ export default function Home() {
         {/* Application Section */}
         <section id="basvuru" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto text-center mb-12"
-            >
+            <div className="max-w-3xl mx-auto text-center mb-12">
               <FlipText
                 as="h2"
                 className="text-3xl md:text-4xl font-bold text-white mb-6 section-title"
@@ -457,14 +397,9 @@ export default function Home() {
                 Tersine beyin göçü programına başvurmak için aşağıdaki formu doldurabilir veya detaylı bilgi için
                 bizimle iletişime geçebilirsiniz.
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="max-w-md mx-auto bg-neutral-900/80 backdrop-blur-sm p-6 rounded-lg border border-purple-900/20"
+            </div>
+            <div
+              className="max-w-md mx-auto bg-neutral-900/90 p-6 rounded-lg border border-purple-900/20 shadow-md"
             >
               <form className="space-y-4">
                 <div>
@@ -529,7 +464,7 @@ export default function Home() {
                   Gönder
                 </button>
               </form>
-            </motion.div>
+            </div>
           </div>
         </section>
 

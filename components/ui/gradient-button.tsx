@@ -34,7 +34,7 @@ export default function GradientButton({
           "absolute inset-0",
           "bg-linear-to-r from-purple-500 via-purple-600 to-white",
           "opacity-40 group-hover:opacity-80",
-          "blur-[2.5px] transition-opacity duration-500",
+          "transition-opacity duration-500",
         )}
       />
 
