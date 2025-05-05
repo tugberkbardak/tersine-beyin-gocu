@@ -250,6 +250,9 @@ export default function Home() {
           <div className="text-white text-3xl font-bold">84 Şirket</div>
         </div>
 
+
+        
+
         {/* About Section */}
         <section id="hakkimizda" className="relative z-10 py-20 w-full bg-neutral-950">
           <div className="container mx-auto px-4">
