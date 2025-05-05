@@ -169,7 +169,7 @@ export default function BeamsBackground({
 
   return (
     <div className={cn("absolute inset-0 w-full overflow-hidden bg-neutral-950", className)}>
-      <canvas ref={canvasRef} className="fixed inset-0" style={{}} />
+      <canvas ref={canvasRef} className="fixed inset-0" style={{ filter: 'blur(20px)' }} />
 
       <motion.div
         className="fixed inset-0 bg-neutral-950/5"
@@ -181,7 +181,7 @@ export default function BeamsBackground({
           ease: "easeInOut",
           repeat: Number.POSITIVE_INFINITY,
         }}
-        style={{}}
+        style={{ backdropFilter: 'blur(40px)' }}
       />
 
       {/* Content will be rendered through children prop */}
