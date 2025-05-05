@@ -1,6 +1,7 @@
 import { Carattere } from 'next/font/google'
 import type { Metadata } from 'next'
 import './globals.css'
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: 'Tersine Beyin Göçü',
