@@ -21,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={carattere.className}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
